@@ -2,6 +2,9 @@ use std::io;
 const THREE_HOURS_IN_SECONDS: u32 = 60 * 60 * 3;
 //Needs to be set at compile time, and type specified
 fn main() {
+    println!("Hello, world!");
+
+    another_function();
     let x = 5;
     let x = x + 1;
     {
@@ -46,9 +49,9 @@ fn main() {
 
     let mut index = String::new();
 
-    io::stdin()
-        .read_line(&mut index)
-        .expect("Failed to read line");
+    // io::stdin()
+    //     .read_line(&mut index)
+    //     .expect("Failed to read line");
 
     let index: usize = index
         .trim()
@@ -57,4 +60,8 @@ fn main() {
 
     let element = arr[index];
     println!("The value of element at index {} is {}", element, index);
+}
+
+fn another_function() {
+    println!("Another function.");
 }
