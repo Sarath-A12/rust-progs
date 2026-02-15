@@ -61,10 +61,25 @@ fn main() {
     // Again, the point being that since it's used the last
     // And r1 and r2 won't be used anymore
     // It's okay to use it now
+
+    /*
+    Hoow does rust deal with dangling pointers
+     */
+
+    let reference_to_nothing = dangle();
+
 }
 // & means references
 // Simply put, it means that you refer to the value
 // Without taking ownership of the value.
+
+
+fn dangle() -> String { // Supposed to return reference to a string
+    let s = String::from("hello"); // s is a new string
+    s // returning the reference, if it was & it wouldn't work, now it will coz ownership is transferred
+}
+// s goes out of scope and is dropped ! Memory goes away
+// Danger!
 
 /*
     THIS IS CALLED BORROWING
