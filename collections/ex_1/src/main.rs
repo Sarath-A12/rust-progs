@@ -1,5 +1,4 @@
-use core::panic;
-use std::io;
+use std::{collections::HashMap, io};
 
 /*
 Given a list of integers, use a vector and return the median
@@ -11,8 +10,12 @@ fn main() {
     // Get input from the user
     let input = get_list_from_user();
 
-    let mut input_copy = input.clone();
-    let median: i32 = find_median(&mut input_copy);
+    let median= find_median(input.clone());
+    println!("The median is {}", median);
+    // println!("Sanity check if input_copy is valid: {:?}", input_copy);
+
+    let mode = find_mode(input);
+    println!("The mode of the array is {}", mode);
 }
 
 fn get_list_from_user() -> Vec<i32> {
@@ -22,7 +25,7 @@ fn get_list_from_user() -> Vec<i32> {
     io::stdin().read_line(&mut input_string).expect("Invalid input");
     let input_size: i32 = input_string.trim().parse()
                                         .expect("Invalid number entered");
-    for _ in 1..input_size {
+    for _ in 0..input_size {
         let mut num = String::new();
         io::stdin().read_line(&mut num).expect("Invalid input");
         let num_int: i32 = num.trim().parse().expect("Invalid number");
@@ -33,23 +36,43 @@ fn get_list_from_user() -> Vec<i32> {
 }
 
 
-fn find_median(mut input: Vec<i32>) -> i32 {
+fn find_median(mut input: Vec<i32>) ->f64 {
     input.sort();
     let mut ans: f64 = -1.0;
     let size = input.len();
     if size%2 == 0 {
-        if let ans =  {
-            
-        }
+       if let Some(num1) = input.get(size/2) {
+            if let Some (num2) = input.get(size/2 -1 ) {
+                ans = ((*num1) as f64 + (*num2) as f64)/2.0;
+            }   
+       } 
     }
     else {
-        ans = match input.get((size - 1)/ 2) {
-            Some(val) => *val.into(), 
-            None => panic!(
-                "Unknown error occured"
-            ),
-        };
+        if let Some(num) = input.get((size - 1) / 2) {
+            ans = (*num).into();
+        }
     }
+    ans
+}
 
+fn find_mode(input: Vec<i32>) -> i32 {
+    let mut hsh = HashMap::new();
+    for i in input {
+        let val = hsh.get(&i);
+        if let Some(value) = val {
+            hsh.insert(i, value + 1);
+        }
+        else {
+            hsh.insert(i, 0);
+        }
+    }
+    let mut max = -1;
+    let mut ans= -1;
+    for (key, value) in hsh.iter() {
+        if *value > max {
+            max = *value;
+            ans = *key; 
+        } 
+    }
     ans
 }
