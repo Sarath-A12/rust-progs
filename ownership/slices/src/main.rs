@@ -52,6 +52,9 @@ fn main() {
 
     let word = first_word(my_string_literal);
 
+    // Don't mind me this is just me testing out how stuff is after having installed 
+    // neovim. It looks amazing! Yet to set up the LSP with this though ! Ciao !!
+
 }
 
 //Ownership is fine 
