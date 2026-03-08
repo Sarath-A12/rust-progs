@@ -22,9 +22,11 @@ fn get_list_from_user() -> Vec<i32> {
     let mut list = Vec::new();
     let mut input_string = String::new();
 
+    println!("Enter the number of elements in the vector");
     io::stdin().read_line(&mut input_string).expect("Invalid input");
     let input_size: i32 = input_string.trim().parse()
                                         .expect("Invalid number entered");
+    println!("Enter the elements one by one");
     for _ in 0..input_size {
         let mut num = String::new();
         io::stdin().read_line(&mut num).expect("Invalid input");
@@ -34,7 +36,6 @@ fn get_list_from_user() -> Vec<i32> {
 
     list
 }
-
 
 fn find_median(mut input: Vec<i32>) ->f64 {
     input.sort();
@@ -63,7 +64,7 @@ fn find_mode(input: Vec<i32>) -> i32 {
             hsh.insert(i, value + 1);
         }
         else {
-            hsh.insert(i, 0);
+            hsh.insert(i, 1);
         }
     }
     let mut max = -1;
