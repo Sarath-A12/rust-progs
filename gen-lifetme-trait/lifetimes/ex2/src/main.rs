@@ -51,5 +51,8 @@ fn longest_other<'a>(x: &'a str, y: &str) -> &'a str {
 
 fn longest_ot<'a>(x: &str, y: &str) -> &'a str {
     let result = String::from("really long string");
-    result.as_str()
+    // result.as_str()
+    // creates dangling pointer as the reference is invalid at the end
+    // of this function
+    result
 }
